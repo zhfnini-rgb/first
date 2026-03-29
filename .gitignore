@@ -1,0 +1,18 @@
+# Local secrets
+.env
+.env.local
+.env.*.local
+
+# Local OpenClaw state
+.openclaw/
+sessions/
+logs/
+tmp/
+
+# Dependencies / build output
+node_modules/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log

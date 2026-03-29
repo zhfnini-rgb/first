@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Validate JSON files
+      run: |
+        # 检查 JSON 格式
+        for file in *.json; do
+          if [ -f "$file" ]; then
+            echo "Checking $file..."
+            node -e "JSON.parse(require('fs').readFileSync('$file'))"
+          fi
+        done
+    
+    - name: Check PowerShell scripts
+      shell: pwsh
+      run: |
+        $scripts = Get-ChildItem scripts/*.ps1 -ErrorAction SilentlyContinue
+        foreach ($script in $scripts) {
+          Write-Host "Analyzing $($script.Name)..."
+          $errors = $null
+          [System.Management.Automation.PSParser]::Tokenize((Get-Content $script.FullName -Raw), [ref]$errors) | Out-Null
+          if ($errors.Count -gt 0) {
+            Write-Error "Script $($script.Name) has $($errors.Count) parsing errors"
+            exit 1
+          }
+        }
+    
+    - name: Check file encoding
+      run: |
+        # 确保 PowerShell 脚本是 UTF-8 with BOM 或 UTF-8
+        find scripts -name "*.ps1" -exec file {} \;

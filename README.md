@@ -1,61 +1,78 @@
-# OpenClaw Telegram + Kimi Starter
+# OpenClaw Multi-language Starter
 
-这是一个面向 Windows 场景的 OpenClaw 实战模板仓库，默认围绕 `Telegram + Kimi` 搭建，适合用来快速起一个可运行、可扩展、可继续定制的个人 AI 助手环境。
+这是一个面向 Windows 的 OpenClaw 实战模板仓库。
 
-## 这个仓库解决什么问题
+它现在不只是 `Telegram + Kimi` 起步模板，也已经扩展成一个多编程语言的 OpenClaw starter，可以把 OpenClaw 更自然地接进 `Java`、`Python`、`Node.js` 等项目工作区。
 
-很多人装上 OpenClaw 之后，真正卡住的不是“能不能装”，而是：
+## 这个仓库现在能做什么
 
-- 配置文件怎么组织
-- Telegram bot 怎么接进来
-- Kimi 怎么作为默认模型接入
-- 工作区文件该怎么写
-- Windows 上怎么快速启动和检查状态
+- 提供 `OpenClaw + Telegram + Kimi` 的可运行示例配置
+- 提供 Windows 启动与状态检查脚本
+- 提供多语言项目可直接复用的 `AGENTS.md` 模板
+- 提供 `.env` 示例，避免把真实密钥直接写进仓库
+- 提供一个适合继续扩展的个人 OpenClaw 配置仓库骨架
 
-这个仓库就是把这些常见起步步骤整理成一个最小可用模板，尽量做到 clone 下来后稍微改一下就能跑。
+## 已支持的多语言模板
 
-## 仓库里现在有什么
+- `templates/java/AGENTS.md`
+- `templates/python/AGENTS.md`
+- `templates/nodejs/AGENTS.md`
+- `templates/README.md`
 
-- `openclaw.telegram-kimi.example.json`: 面向 `Telegram + Kimi` 的实用配置模板
-- `openclaw.example.json`: 更基础的 OpenClaw 配置示例
-- `.env.example`: 环境变量模板，避免把真实密钥写进仓库
-- `scripts/start-openclaw.ps1`: Windows 启动脚本
-- `scripts/status-openclaw.ps1`: Windows 状态检查脚本
-- `workspace/AGENTS.md`: 工作区级 agent 规则
-- `workspace/TOOLS.md`: 常用命令和排查说明
-- `workspace/HEARTBEAT.md`: 轻量心跳检查模板
-- `QUICKSTART-WINDOWS.md`: Windows 快速开始说明
+这些模板的用途很直接：
 
-## 适合谁
+把对应语言的 `AGENTS.md` 复制或合并到你自己的项目工作区里，让 OpenClaw agent 更清楚你的技术栈、构建方式、测试入口、改动边界，以及应该优先遵循的工程习惯。
 
-这个模板比较适合：
+## 适合哪些项目
 
-- 想把 Telegram bot 接到 OpenClaw 的人
-- 想默认使用 Kimi 的人
-- 想先在 Windows 本地跑通，再慢慢扩展的人
-- 想把 OpenClaw 配置、脚本、工作区说明放进 GitHub 管理的人
+- Java 项目：Spring Boot、Maven、Gradle 等
+- Python 项目：脚本、自动化、服务端、小工具等
+- Node.js / TypeScript 项目：CLI、Web、机器人、自动化等
+
+## 仓库里现在包含什么
+
+- `openclaw.telegram-kimi.example.json`
+- `openclaw.example.json`
+- `.env.example`
+- `scripts/start-openclaw.ps1`
+- `scripts/status-openclaw.ps1`
+- `QUICKSTART-WINDOWS.md`
+- `workspace/AGENTS.md`
+- `workspace/TOOLS.md`
+- `workspace/HEARTBEAT.md`
+- `templates/README.md`
+- `templates/java/AGENTS.md`
+- `templates/python/AGENTS.md`
+- `templates/nodejs/AGENTS.md`
 
 ## 快速开始
 
-1. 克隆仓库
-2. 安装 OpenClaw
-3. 按 `.env.example` 填写你自己的密钥
-4. 运行 `scripts/start-openclaw.ps1`
-5. 用 `scripts/status-openclaw.ps1` 检查状态
+1. 克隆这个仓库
+2. 按 `.env.example` 创建你自己的 `.env`
+3. 参考 `openclaw.telegram-kimi.example.json` 准备配置
+4. 运行 `powershell -ExecutionPolicy Bypass -File .\scripts\start-openclaw.ps1`
+5. 如果你要把 OpenClaw 接入现有项目，再从 `templates/` 里挑一个最接近的语言模板放进你的项目工作区
 
-更完整的步骤见 [QUICKSTART-WINDOWS.md](https://github.com/zhfnini-rgb/first/blob/main/QUICKSTART-WINDOWS.md)。
+## 推荐用法
 
-## 设计原则
+如果你只是想快速跑起来：
 
-- 默认可跑，不追求一开始就很复杂
-- 优先中文说明
-- 尽量减少把真实凭据写进仓库的风险
-- 优先保留后续扩展空间，例如多 agent、自动化脚本、社媒工作流
+直接使用现成的 `Telegram + Kimi` 模板。
 
-## 后续可以继续补充
+如果你想把 OpenClaw 放进自己的代码仓库长期使用：
+
+优先从 `templates/java`、`templates/python` 或 `templates/nodejs` 里挑一个起点，再结合你项目自己的命令、目录结构和代码规范做微调。
+
+## 后续可以继续扩展
+
+后面还可以继续往这个仓库里加：
 
 - 多 agent 模板
-- 双 Telegram bot 路由模板
-- Tieba / 社媒自动化脚本
-- GitHub Actions 或部署说明
-- 更完整的 OpenClaw 工作区规范
+- 双 Telegram bot 协作模板
+- Tieba / 自动化脚本模板
+- GitHub Actions 部署或巡检脚本
+- 更多语言模板，比如 Go、C#、Rust
+
+## 目标
+
+把这个仓库做成一个既能直接运行，又能按语言和项目类型快速改造的 OpenClaw 基础模板。

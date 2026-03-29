@@ -1,0 +1,84 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "model": {
+        "primary": "moonshot/kimi-k2.5",
+        "fallbacks": [
+          "gptge/gpt-5.3-codex"
+        ]
+      },
+      "models": {
+        "moonshot/kimi-k2.5": {
+          "alias": "Kimi K2.5"
+        },
+        "gptge/gpt-5.3-codex": {
+          "alias": "GPT-5.3 Codex"
+        }
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "default": true,
+        "workspace": "~/.openclaw/workspace"
+      }
+    ]
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "moonshot": {
+        "baseUrl": "https://api.moonshot.ai/v1",
+        "apiKey": "${MOONSHOT_API_KEY}",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "kimi-k2.5",
+            "name": "Kimi K2.5",
+            "reasoning": false,
+            "input": [
+              "text"
+            ],
+            "cost": {
+              "input": 0,
+              "output": 0,
+              "cacheRead": 0,
+              "cacheWrite": 0
+            },
+            "contextWindow": 256000,
+            "maxTokens": 8192
+          }
+        ]
+      }
+    }
+  },
+  "gateway": {
+    "mode": "local",
+    "bind": "loopback"
+  },
+  "discovery": {
+    "mdns": {
+      "mode": "off"
+    }
+  },
+  "channels": {
+    "telegram": {
+      "accounts": {
+        "default": {
+          "botToken": "${TELEGRAM_BOT_TOKEN}",
+          "dmPolicy": "pairing"
+        }
+      }
+    }
+  },
+  "bindings": [
+    {
+      "agentId": "main",
+      "match": {
+        "channel": "telegram",
+        "accountId": "default"
+      }
+    }
+  ]
+}
